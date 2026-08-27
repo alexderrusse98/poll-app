@@ -1,7 +1,6 @@
 import { Component, signal, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SupabaseService } from './services/supabase';
-
+import { SupabaseService } from './shared/services/supabase';
 
 @Component({
   selector: 'app-root',
