@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { computed, Component, inject, signal } from '@angular/core';
 import { SupabaseService } from '../../services/supabase';
 
 @Component({
@@ -10,5 +10,18 @@ import { SupabaseService } from '../../services/supabase';
 export class HomeComponent {
   surveysService = inject(SupabaseService)
 
-  list = this.surveysService.surveys
+
+  activeTab = signal<'active' | 'past'>('active')
+
+  
+  filteredSurveys = computed(() => {
+    const now = new Date()
+    if (this.activeTab() === 'active') {
+      return this.surveysService.surveys().filter(s => new Date(s.end_date) > now)
+    } else {
+      return this.surveysService.surveys().filter(s => new Date(s.end_date) < now)
+    }
+  }
+  )
+
 }

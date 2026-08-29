@@ -10,10 +10,9 @@ export class SupabaseService {
         "sb_publishable_D_YaFzUELLVhbPQhY82CVg_k_pyYWok"
     );
 
-
-    // was macht das genau?
     surveys = signal<Survey[]>([])
 
+    activTab = signal<'active' | 'past'>('active')
 
     async getSurveys() {
         let response = await this.supabase

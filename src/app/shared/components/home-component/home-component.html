@@ -1,13 +1,17 @@
 <p>deine Mudda works!!</p>
-
+<div class="filter-btns">
+    <button (click)="activeTab.set('active')">Active</button>
+    <button (click)="activeTab.set('past')">Past</button>
+</div>
 <table>
     <tbody>
-        @for (item of list(); track $index) {
+        @for (item of filteredSurveys(); track $index) {
         <tr>
-            <td>{{item.name}}</td>
             <td>{{item.category}}</td>
-            <td>{{item.end_date}}</td>
-            <td>{{item.id}}</td>
+            <h2>
+                <td>{{item.name}}</td>
+            </h2>
+            <td>Datum: {{item.end_date}} </td>
         </tr>
         }
     </tbody>
