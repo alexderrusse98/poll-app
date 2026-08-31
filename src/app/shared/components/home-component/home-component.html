@@ -3,10 +3,11 @@
     <button (click)="activeTab.set('active')">Active</button>
     <button (click)="activeTab.set('past')">Past</button>
 </div>
-<select name="" id="">
-    <option (click)="selectedCategory.set('all')" value="">Alle</option>
+
+<select (change)="selectedCategory.set($any($event.target).value)">
+    <option value="all">Alle</option>
     @for (cat of availableCategories(); track cat) {
-    <option (click)="selectedCategory.set(cat)" value="">{{cat}}</option>
+    <option [value]="cat">{{cat}}</option>
     }
 </select>
 
