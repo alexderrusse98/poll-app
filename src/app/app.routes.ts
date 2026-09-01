@@ -9,7 +9,7 @@ export const routes: Routes = [
         component: HomeComponent
     },
     {
-        path: "survey-detail",
+        path: "survey-detail/:id",
         component: SurveyDetail
     }
 ];

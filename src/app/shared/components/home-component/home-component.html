@@ -1,23 +1,40 @@
-<p>deine Mudda works!!</p>
-<div class="filter-btns">
-    <button (click)="activeTab.set('active')">Active</button>
-    <button (click)="activeTab.set('past')">Past</button>
-</div>
+<section>
 
-<select (change)="onCategoryChange($event)">
-    <option value="all">Alle</option>
-    @for (cat of availableCategories(); track cat) {
-    <option [value]="cat">{{cat}}</option>
-    }
-</select>
 
-<div>
-    @for (item of filteredSurveys(); track item.id) {
-    <div class="survey">
-        <span><b>Kategorie:</b> {{item.category}} </span>
-        <span><b>Name:</b> {{item.name}} </span>
-        <span><b>Datum:</b> {{item.end_date}} </span>
+    <div class="currentSurveys">
+        <h3>Ablaufende Surveys</h3>
+        <div class="surveys">
+            @for (item of endingSoonSurveys(); track item.id) {
+            <div class="survey-content">
+                <span> {{item.name}}</span>
+                <span> {{item.end_date}}</span>
+            </div>}
+        </div>
     </div>
-    }
-</div>
-  <button [routerLink]="['survey-detail']" role="button">Ab zu den Details Baby</button>
+
+
+
+
+    <div class="filter-btns">
+        <button (click)="activeTab.set('active')">Active</button>
+        <button (click)="activeTab.set('past')">Past</button>
+    </div>
+
+    <select (change)="onCategoryChange($event)">
+        <option value="all">Alle</option>
+        @for (cat of availableCategories(); track cat) {
+        <option [value]="cat">{{cat}}</option>
+        }
+    </select>
+
+    <div>
+        @for (item of filteredSurveys(); track item.id) {
+        <a [routerLink]="['survey-detail', item.id]" role="a" class="survey">
+            <span><b>Kategorie:</b> {{item.category}} </span>
+            <span><b>Name:</b> {{item.name}} </span>
+            <span><b>Datum:</b> {{item.end_date}} </span>
+        </a>
+        }
+    </div>
+
+</section>

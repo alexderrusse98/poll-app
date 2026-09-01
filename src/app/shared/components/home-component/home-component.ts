@@ -43,7 +43,13 @@ export class HomeComponent {
   }
   )
 
- 
+  endingSoonSurveys = computed(() => {
+    const now = new Date()
+    return this.surveysService.surveys().filter(s => new Date(s.end_date) > now)
+      .sort((a, b) => new Date(a.end_date).getTime() - new Date(b.end_date).getTime())
+      .slice(0, 3)
+  })
+
   onCategoryChange(event: Event) {
     const value = (event.target as HTMLSelectElement).value
     this.selectedCategory.set(value)

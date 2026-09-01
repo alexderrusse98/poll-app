@@ -1,4 +1,15 @@
 <p>survey-detail works!</p>
 
 
+@if (currentSurvey(); as survey) {
+<h1>{{ survey.name }}</h1>
+<p>Kategorie: {{ survey.category }}</p>
+<p>Endet am: {{ survey.end_date }}</p>
+<p> {{ survey.description }}</p>
+} @else {
+<p>Loading survey details...</p>
+}
+
+
+
 <button routerLink="/" role="button">Back</button>

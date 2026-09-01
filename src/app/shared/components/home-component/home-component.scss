@@ -10,4 +10,25 @@
     align-items: flex-start;
     margin-bottom: 16px;
     margin-top: 16px;
+    color: black;
+    text-decoration: none;
+
+    &:hover {
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+}
+
+.surveys {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 16px;
+
+    .survey-content {
+        display: flex;
+        flex-direction: column;
+
+    }
 }

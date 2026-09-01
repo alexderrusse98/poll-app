@@ -12,6 +12,8 @@ export class SupabaseService {
 
     surveys = signal<Survey[]>([])
 
+    curretnSurvey = signal<Survey | null>(null)
+
     activTab = signal<'active' | 'past'>('active')
 
     async getSurveys() {
@@ -25,4 +27,19 @@ export class SupabaseService {
         console.log(response.data)
         this.surveys.set((response.data ?? []) as Survey[])
     }
+
+    async getSurveyById(id: number) {
+        let response = await this.supabase
+            .from('surveys')
+            .select('*')
+            .eq('id', id)
+            .single()
+
+        if (response.error) {
+            console.error('Error fetching surveys:', response.error);
+            return;
+        }
+        this.curretnSurvey.set(response.data as Survey)
+    }
+
 }
