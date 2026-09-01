@@ -18,8 +18,11 @@ export class SupabaseService {
         let response = await this.supabase
             .from('surveys')
             .select('*')
-        if (response.error) console.error('hat nicht geklappt')
-        console.log(response.data);
+        if (response.error) {
+            console.error('Error fetching surveys:', response.error);
+            return;
+        }
+        console.log(response.data)
         this.surveys.set((response.data ?? []) as Survey[])
     }
 }

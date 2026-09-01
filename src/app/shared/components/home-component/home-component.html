@@ -4,25 +4,20 @@
     <button (click)="activeTab.set('past')">Past</button>
 </div>
 
-<select (change)="selectedCategory.set($any($event.target).value)">
+<select (change)="onCategoryChange($event)">
     <option value="all">Alle</option>
     @for (cat of availableCategories(); track cat) {
     <option [value]="cat">{{cat}}</option>
     }
 </select>
 
-<table>
-    <tbody>
-        @for (item of filteredSurveys(); track $index) {
-        <tr>
-            <td>{{item.category}}</td>
-            <h2>
-                <td>{{item.name}}</td>
-            </h2>
-            <td>Datum: {{item.end_date}} </td>
-        </tr>
-
-
-        }
-    </tbody>
-</table>
+<div>
+    @for (item of filteredSurveys(); track item.id) {
+    <div class="survey">
+        <span><b>Kategorie:</b> {{item.category}} </span>
+        <span><b>Name:</b> {{item.name}} </span>
+        <span><b>Datum:</b> {{item.end_date}} </span>
+    </div>
+    }
+</div>
+  <button [routerLink]="['survey-detail']" role="button">Ab zu den Details Baby</button>

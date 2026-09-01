@@ -4,3 +4,10 @@
     justify-content: space-between;
 }
 
+.survey {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
