@@ -18,7 +18,8 @@ export class SurveyDetail {
   ngOnInit() {
     let currentId = Number(this.route.snapshot.paramMap.get('id'));
     this.supabaseService.getSurveyById(currentId)
+    this.supabaseService.getQuestionsBySurveyId(currentId)
   }
-
-  currentSurvey = this.supabaseService.curretnSurvey;
+  currentSurvey = this.supabaseService.currentSurvey;
+  currentSurveyQuestions = this.supabaseService.surveysQuestions;
 }

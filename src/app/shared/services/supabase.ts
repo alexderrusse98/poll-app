@@ -1,6 +1,6 @@
 import { Service, signal } from '@angular/core';
 import { createClient } from '@supabase/supabase-js';
-import { Survey } from '../interfaces/survey.interfaces';
+import { Question, Survey } from '../interfaces/survey.interfaces';
 
 @Service()
 
@@ -11,8 +11,10 @@ export class SupabaseService {
     );
 
     surveys = signal<Survey[]>([])
+    surveysQuestions = signal<Question[]>([])
 
-    curretnSurvey = signal<Survey | null>(null)
+
+    currentSurvey = signal<Survey | null>(null)
 
     activTab = signal<'active' | 'past'>('active')
 
@@ -39,7 +41,19 @@ export class SupabaseService {
             console.error('Error fetching surveys:', response.error);
             return;
         }
-        this.curretnSurvey.set(response.data as Survey)
+        this.currentSurvey.set(response.data as Survey)
     }
 
+    async getQuestionsBySurveyId(surveyId: number) {
+        let response = await this.supabase
+            .from('questions')
+            .select('*')
+            .eq('survey_id', surveyId)
+        if (response.error) {
+            console.error('Error fetching surveys:', response.error);
+            return;
+        }
+        this.surveysQuestions.set(response.data as Question[])
+        console.log(response.data)
+    }
 }
