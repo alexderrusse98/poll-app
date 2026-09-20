@@ -1,6 +1,6 @@
 import { Service, signal } from '@angular/core';
 import { createClient } from '@supabase/supabase-js';
-import { Question, Survey } from '../interfaces/survey.interfaces';
+import { Answer, Question, Survey } from '../interfaces/survey.interfaces';
 
 @Service()
 
@@ -55,5 +55,17 @@ export class SupabaseService {
         }
         this.surveysQuestions.set(response.data as Question[])
         console.log(response.data)
+    }
+
+    async updateQuestionAnswers(questionId: number, newAnswers: Answer[]) {
+        const response = await this.supabase
+            .from('questions')
+            .update({ answers: newAnswers })
+            .eq('id', questionId)
+
+        if (response.error) {
+            console.error('Fehler beim Voten:', response.error)
+            return
+        }
     }
 }
